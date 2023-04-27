@@ -1,22 +1,25 @@
-import com.example.demo.student;
+package com.example.demo.student;
+import com.example.demo.student.Repository.StudentRepository;
+import com.example.demo.student.model.Student;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
 
-    public Student createStudent(Student student) {
-        // business logic to create new student
+    @Override
+    public Student loadUserByUsername(String email)
+            throws UsernameNotFoundException {
+        return StudentRepository.findByEmail(email);
     }
 
-    public Student getStudentByEmail(String email) {
-        // business logic to retrieve student by email
-    }
-
-    public void deleteStudent(Student student) {
-        // business logic to delete student
+    public String register(RegistrationRequest request) {
+     return null;
     }
 }

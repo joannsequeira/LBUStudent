@@ -1,8 +1,5 @@
-package com.example.demo.student;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.SequenceGenerator;
+package com.example.demo.student.model;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,11 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Student {
-    private Long Id;
-    private String f_name;
-    private String l_name;
-    private String email;
-    private String password;
+
 
     @SequenceGenerator(
             name = "student_sequence",
@@ -29,6 +22,13 @@ public class Student {
             strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
+    private Long Id;
+    private String f_name;
+    private String l_name;
+    private String email;
+    private String password;
+    @jakarta.persistence.Id
+    private Long id;
 
     public Student(String f_name,
                    String l_name,
@@ -38,6 +38,15 @@ public class Student {
         this.l_name = l_name;
         this.email = email;
         this.password = password;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
 
