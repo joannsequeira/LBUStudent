@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
         @GetMapping("/login")
         public String login(Model model) {
-            model.addAttribute(attributeName:"student", new Student());
+            model.addAttribute("student", new Student());
             return "login";
         }
 

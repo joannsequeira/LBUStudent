@@ -13,13 +13,37 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    @Override
+
     public Student loadUserByUsername(String email)
             throws UsernameNotFoundException {
-        return StudentRepository.findByEmail(email);
+        return studentRepository.findByEmail(email);
     }
 
+    private final StudentService studentService;
+    private final EmailValid emailValid;
+
     public String register(RegistrationRequest request) {
-     return null;
+        boolean isValidEmail = emailValid.test(request.getEmail());
+    if (!isValidEmail) {
+        System.out.println("Not a valid email");
+    }
+        return studentService.signUpStud(
+                new Student(
+                     request.getF_Name(),
+                     request.getL_Name(),
+                     request.getEmail(),
+                     request.getPassword()
+                )
+        );
+    }
+
+    private String signUpStud (Student student)
+    {
+       boolean studExists = studentRepository.findByEmail(student.getEmail())
+                .isPresent();
+       if (studExists) {
+           throw new IllegalStateException("Email in Use");
+       }
+       return "";
     }
 }

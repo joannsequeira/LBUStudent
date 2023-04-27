@@ -5,8 +5,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class RegistrationRequest {
-    private final String f_name;
-    private final String l_name;
+    private final String f_Name;
+    private final String l_Name;
     private final String email;
     private final String password;
 
