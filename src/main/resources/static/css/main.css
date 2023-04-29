@@ -1,0 +1,44 @@
+* {
+	font-family: Arial;
+	margin: 20px;
+	box-sizing: border-box;
+}
+
+body {
+	  background: gray;
+}
+	
+form {
+	background: lightblue;
+	margin-top: 20px;
+	margin-bottom: 35px;
+	width: 350px;
+	height: 450px;
+	padding: 30px 40px 0px 45px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+
+}
+
+.texta {
+     border-bottom:2px solid black;
+     position: relative;
+     margin: 35px 0;	 
+ }
+ 
+ .texta input {
+	 outline:none;
+     background: none;
+	 border: none;
+	 font-size:15px;
+ }
+	
+.btn {
+     height: 30px;
+	 width:80%;
+	 background: green;
+	 color: white;
+	 font-size:20px;
+}	

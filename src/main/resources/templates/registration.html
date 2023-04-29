@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>LBU Register</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,22 +34,17 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an LBU Student Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Create a Student Account!</h1>
                             </div>
-                            <form th:action="@{/register}" method="post" th:object="${student}">
+                            <form action="newUser" method="post">
                                <div class="form-group row">
                                    <label class="nav-item">Full Name</label>
 
-                                        <input type="text" class="form-control form-control-user" id="fullName"
-                                               placeholder="Type your full name" th:field="*{fullName}">
-                                   <label class="nav-item">User Name</label>
+                                        <input type="text" class="form-control form-control-user" id="f_Name"
+                                               placeholder="Type your first name" th:field="*{f_Name}">
 
-
-
-                                        <input type="text" class="form-control form-control-user" id="UserName"
-                                               placeholder="Type your username" th:field="*{username}">
-
-
+                                   <input type="text" class="form-control form-control-user" id="l_Name"
+                                          placeholder="Type your last name" th:field="*{l_Name}">
 
                                    <label class="nav-item">Email</label>
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
@@ -59,12 +54,6 @@
                                     <input type="password" class="form-control form-control-user" id="password"
                                            placeholder="Your Password" th:field="*{password}">
 
-                                   <label class="nav-item">Age</label>
-                                            <input type="number" class="form-control form-control-user" id="age"
-                                                   placeholder="Age" th:field="*{age}">
-                                   <label class="nav-item">Phone</label>
-                                   <input type="number" class="form-control form-control-user" id="phone"
-                                          placeholder="Phone number" th:field="*{phone}">
                                    <label class="nav-item">&nbsp;</label>
                                    <input class="btn btn-primary btn-user btn-block" type="submit" value="Create Account" />
 
