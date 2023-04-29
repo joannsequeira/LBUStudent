@@ -30,8 +30,8 @@ public class Student {
     @jakarta.persistence.Id
     private Long id;
 
-    public Student(String fName,
-                   String lName,
+    public Student(String f_Name,
+                   String l_Name,
                    String email,
                    String password
     ) { }

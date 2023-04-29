@@ -14,7 +14,7 @@ public class StudentService {
     private StudentRepository studentRepository;
 
 
-    public Student loadUserByUsername(String email)
+    public Student getEmail(String email)
             throws UsernameNotFoundException {
         return studentRepository.findByEmail(email);
     }

@@ -46,7 +46,9 @@ import org.springframework.web.bind.annotation.RequestBody;
         @PostMapping("/register")
         public String register(@ModelAttribute Student student) {
             // create new student
-        }
+            return null;
+
+
     }
 
 }
