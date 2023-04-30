@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -25,7 +26,7 @@ public class StudentService {
     public Student newUser(Student student){
         Random ran = new Random();
         Integer numb = ran.nextInt(30000) + 10000;
-        student.setId((Integer)numb);
+        student.setId(Long.valueOf((Integer)numb));
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentRepo.save(student);
     }
@@ -37,8 +38,8 @@ public class StudentService {
         studentSys.getPassword(passwordEncoder.encode(student.getPassword()));
         studentRepo.save(studentSys);
     }
-    public Student getStudById(Integer Id){
-        Student stude = studentRepo.findById(Id);
-        return stude;
+    public Student getById(Long Id){
+        Student student = studentRepo.findById(Id);
+        return student;
     }
 }

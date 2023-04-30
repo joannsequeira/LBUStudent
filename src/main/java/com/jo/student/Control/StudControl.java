@@ -35,7 +35,7 @@ public class StudControl {
     @Resource(name="authenticationManager")
     private AuthenticationManager authManager;
 
-    @PostMapping("/login") {
+    /* @PostMapping("/login") {
         public String loginAfter(@ModelAttribute Student student, HttpServletRequest req){
             String email = student.getEmail();
             String password = student.getPassword();
@@ -58,7 +58,7 @@ public class StudControl {
         }
         String s = "redirect:/login?error=true";
         return s;
-    }
+    } */
 
 
     @GetMapping("/register")
