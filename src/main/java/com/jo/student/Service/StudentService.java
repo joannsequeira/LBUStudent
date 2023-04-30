@@ -13,6 +13,12 @@ public class StudentService implements StudentServ {
     private StudentRepo studentRepo;
     @Override
     public Student newUser(Student student) {
+
+        student.setPassword(student.getPassword());
         return studentRepo.save(student);
+    }
+    @Override
+    public boolean checkEmail(String email){
+        return studentRepo.existsByEmail(email);
     }
 }
