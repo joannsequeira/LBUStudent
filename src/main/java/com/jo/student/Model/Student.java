@@ -1,13 +1,14 @@
 package com.jo.student.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class Student {
 
@@ -15,12 +16,17 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Integer Id;
+    @Column (nullable = false)
     private String f_Name;
+    @Column (nullable = false)
     private String l_Name;
+    @Column (nullable = false, unique = true)
     private String email;
+    @Column (nullable = false, unique = true)
     private String password;
 
-    public Integer getId() {
+
+   /* public Integer getId() {
         return Id;
     }
 
@@ -58,5 +64,5 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    } */
 }

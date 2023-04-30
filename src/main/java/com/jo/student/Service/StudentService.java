@@ -3,22 +3,42 @@ package com.jo.student.Service;
 import com.jo.student.Model.Student;
 import com.jo.student.Repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 @Service
-public class StudentService implements StudentServ {
+public class StudentService {
 
     @Autowired
     private StudentRepo studentRepo;
-    @Override
-    public Student newUser(Student student) {
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-        student.setPassword(student.getPassword());
-        return studentRepo.save(student);
+    public Student getEmail(String email){
+        Student stud = studentRepo.findByEmail(email);
+        return stud;
     }
+
     @Override
-    public boolean checkEmail(String email){
-        return studentRepo.existsByEmail(email);
+    public Student newUser(Student student){
+        Random ran = new Random();
+        Integer numb = ran.nextInt(30000) + 10000;
+        student.setId((Integer)numb);
+        student.setPassword(passwordEncoder.encode(student.getPassword()));
+        studentRepo.save(student);
+    }
+
+    public void updateStudent(Student student){
+        Student studentSys = studentRepo.findById(student.getId());
+        studentSys.setF_Name(student.getF_Name());
+        studentSys.setL_Name(studentSys.getL_Name());
+        studentSys.getPassword(passwordEncoder.encode(student.getPassword()));
+        studentRepo.save(studentSys);
+    }
+    public Student getStudById(Integer Id){
+        Student stude = studentRepo.findById(Id);
+        return stude;
     }
 }
