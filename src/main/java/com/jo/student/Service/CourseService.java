@@ -14,7 +14,7 @@ public class CourseService  {
     CourseRepo courseRepo;
 
     public List<Course>getCourse(){
-        List<Course> courseList = CourseRepo.findAll();
+        List<Course> courseList = courseRepo.findAll();
         return courseList;
     }
 

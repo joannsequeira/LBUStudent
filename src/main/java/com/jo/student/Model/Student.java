@@ -26,11 +26,11 @@ public class Student {
     private String password;
 
 
-   /* public Integer getId() {
+   public Long getId() {
         return Id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         Id = id;
     }
 
@@ -58,11 +58,11 @@ public class Student {
         this.email = email;
     }
 
-    public String getPassword() {
+    public String getPassword(String encode) {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    } */
+    }
 }
