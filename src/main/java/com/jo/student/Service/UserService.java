@@ -25,7 +25,7 @@ public class UserService implements UserDetailsService {
         }
 
         return new User(
-                String.valueOf(user.getId()),
+                String.valueOf(user.getsId()),
                 user.getPassword(),
                 Arrays.asList(new SimpleGrantedAuthority("STUDENT"))
 

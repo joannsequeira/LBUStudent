@@ -16,7 +16,7 @@ public class Enrollments {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long enrollId;
     @Column(nullable = false)
-    private Long Id;
+    private Long sId;
     @Column(nullable = false)
     private Long cId;
 }

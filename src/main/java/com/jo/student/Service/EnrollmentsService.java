@@ -13,8 +13,8 @@ public class EnrollmentsService {
     @Autowired
     EnrollmentsRepo enrollmentsRepo;
 
-    public List<Enrollments> getEnrollmentsList(Long Id) {
-    List<Enrollments> enrollmentsList = enrollmentsRepo.findById(Id);
+    public List<Enrollments> getEnrollmentsList(Long sId){
+    List<Enrollments> enrollmentsList = enrollmentsRepo.findBySId(sId);
     return enrollmentsList; }
 
     public void saveEnrollment(Enrollments enrollments) {

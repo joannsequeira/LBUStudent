@@ -83,7 +83,7 @@ public class StudControl {
 
 
     @PostMapping("/register")
-    public String reg(@ModelAttribute Student student, HttpSession session) {
+    public String reg(@ModelAttribute Student student) {
         studentService.newUser(student);
 
         /*boolean f = studentService.checkEmail(student.getEmail());
@@ -112,20 +112,46 @@ public class StudControl {
     public ModelAndView  enrollmentsPage(Authentication authentication){
         ModelAndView mav = new ModelAndView("enrollments");
         User userDetails = (User) authentication.getPrincipal();
-        long Id = Long.valueOf(userDetails.getUsername());
-        mav.addObject("enrollment", enrollmentsService.getEnrollment(Id));
+        long sId = Long.valueOf(userDetails.getUsername());
+        mav.addObject("enrollment", enrollmentsService.getEnrollmentsList(sId));
         return mav;
     }
 
-    @GetMapping("/enrol/course/{cId}")
+    @GetMapping("/enrol/courses/{cId}")
     public String  enrollmentsPage(Authentication authentication, @PathVariable String cId){
         Enrollments enrollment= new Enrollments();
         enrollment.setCId(Long.valueOf(cId));
         User userDetails = (User) authentication.getPrincipal();
-        long Id = Long.valueOf(userDetails.getEmail());
-        enrollment.setId(Id);
+        long sId = Long.valueOf(userDetails.getUsername());
+        enrollment.setSId(sId);
         enrollmentsService.saveEnrollment(enrollment);
         return "redirect:/enrollments";
+    }
+
+    @GetMapping({ "/profile"})
+    public String profile(Authentication authentication, Model model){
+        User userDetails = (User) authentication.getPrincipal();
+        long sId = Long.valueOf(userDetails.getUsername());
+        model.addAttribute("student", studentService.getStudentBySId(sId));
+        return "profile";
+    }
+
+    @PostMapping({ "/profile"})
+    public String profile(Authentication authentication, @ModelAttribute Student student){
+        User userDetails = (User) authentication.getPrincipal();
+        long sId = Long.valueOf(userDetails.getUsername());
+        student.setsId(sId);
+        studentService.updateStudent(student);
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/grad")
+    public ModelAndView  graduationPage(Authentication authentication){
+        ModelAndView mav = new ModelAndView("grad");
+        User userDetails = (User) authentication.getPrincipal();
+        long studentId = Long.valueOf(userDetails.getUsername());
+        mav.addObject("grad", studentService.getGrad(studentId));
+        return mav;
     }
 
 

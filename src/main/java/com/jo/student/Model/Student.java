@@ -16,6 +16,8 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long Id;
+    @Column(nullable = false, unique = true)
+    private Long sId;
     @Column (nullable = false)
     private String f_Name;
     @Column (nullable = false)
@@ -32,6 +34,14 @@ public class Student {
 
     public void setId(Long id) {
         Id = id;
+    }
+
+    public Long getsId() {
+        return sId;
+    }
+
+    public void setsId(Long sId) {
+        this.sId = sId;
     }
 
     public String getF_Name() {
@@ -58,7 +68,7 @@ public class Student {
         this.email = email;
     }
 
-    public String getPassword(String encode) {
+    public String getPassword(String password) {
         return password;
     }
 
