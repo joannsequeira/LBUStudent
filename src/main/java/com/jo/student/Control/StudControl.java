@@ -1,7 +1,9 @@
 package com.jo.student.Control;
 
+import com.jo.student.Model.Enrollments;
 import com.jo.student.Model.Student;
 import com.jo.student.Service.CourseService;
+import com.jo.student.Service.EnrollmentsService;
 import com.jo.student.Service.StudentService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -29,6 +32,9 @@ public class StudControl {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private EnrollmentsService enrollmentsService;
 
 
     @GetMapping("/login")
@@ -101,4 +107,26 @@ public class StudControl {
         mav.addObject("courses", courseService.getCourse());
         return mav;
     }
+
+    @GetMapping("/enrollments")
+    public ModelAndView  enrollmentsPage(Authentication authentication){
+        ModelAndView mav = new ModelAndView("enrollments");
+        User userDetails = (User) authentication.getPrincipal();
+        long Id = Long.valueOf(userDetails.getUsername());
+        mav.addObject("enrollment", enrollmentsService.getEnrollment(Id));
+        return mav;
+    }
+
+    @GetMapping("/enrol/course/{cId}")
+    public String  enrollmentsPage(Authentication authentication, @PathVariable String cId){
+        Enrollments enrollment= new Enrollments();
+        enrollment.setCId(Long.valueOf(cId));
+        User userDetails = (User) authentication.getPrincipal();
+        long Id = Long.valueOf(userDetails.getEmail());
+        enrollment.setId(Id);
+        enrollmentsService.saveEnrollment(enrollment);
+        return "redirect:/enrollments";
+    }
+
+
 }

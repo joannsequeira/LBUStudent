@@ -19,12 +19,12 @@ class MiscBeans {
 
     private static final Logger log = LoggerFactory.getLogger(MiscBeans.class);
 
-    /* @Bean
+    @Bean
     public LocalValidatorFactoryBean getValidator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
-    } */
+    }
 
     @Bean
     public MessageSource messageSource() {

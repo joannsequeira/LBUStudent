@@ -3,9 +3,7 @@ package com.jo.student.Service;
 import com.jo.student.Model.Student;
 import com.jo.student.Repo.StudentRepo;
 import org.springframework.stereotype.Service;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
