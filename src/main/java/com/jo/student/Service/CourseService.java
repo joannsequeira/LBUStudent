@@ -3,7 +3,9 @@ package com.jo.student.Service;
 import com.jo.student.Model.Course;
 import com.jo.student.Repo.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

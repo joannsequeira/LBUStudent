@@ -29,14 +29,14 @@ public class StudentService {
     public Student newUser(Student student){
         Random ran = new Random();
         Integer numb = ran.nextInt(30000) + 10000;
-        student.setsId((long)numb);
+        student.setSId((long)numb);
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentRepo.save(student);
         return null;
     }
 
     public void updateStudent(Student student) {
-        Student stud = studentRepo.findBySId(student.getsId());
+        Student stud = studentRepo.findBySId(student.getSId());
             stud.setF_Name(student.getF_Name());
             stud.setF_Name(student.getL_Name());
             stud.setPassword(passwordEncoder.encode(student.getPassword()));

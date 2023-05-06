@@ -33,15 +33,8 @@ public class Student {
     }
 
     public void setId(Long id) {
-        Id = id;
-    }
 
-    public Long getsId() {
-        return sId;
-    }
-
-    public void setsId(Long sId) {
-        this.sId = sId;
+       Id = id;
     }
 
     public String getF_Name() {
@@ -57,7 +50,7 @@ public class Student {
     }
 
     public void setL_Name(String l_Name) {
-        this.l_Name = l_Name;
+                                  this.l_Name = l_Name;
     }
 
     public String getEmail() {
@@ -74,5 +67,13 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getSId() {
+       return sId;
+    }
+
+    public void setSId(long sId) {
+       this.sId = sId;
     }
 }

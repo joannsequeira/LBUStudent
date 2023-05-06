@@ -1,9 +1,6 @@
 package com.jo.student.Control;
 
-import com.jo.student.Model.Enrollments;
 import com.jo.student.Model.Student;
-import com.jo.student.Service.CourseService;
-import com.jo.student.Service.EnrollmentsService;
 import com.jo.student.Service.StudentService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,26 +13,17 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-public class StudControl {
-
-    @Autowired
-    private StudentService studentService;
+@RestController
+public class StudentControl {
 
     @Autowired
-    private CourseService courseService;
-
-    @Autowired
-    private EnrollmentsService enrollmentsService;
-
+    StudentService studentService;
 
     @GetMapping("/login")
     public String login(org.springframework.ui.Model model) {
@@ -45,7 +33,6 @@ public class StudControl {
 
     @Resource(name = "authenticationManager")
     private AuthenticationManager authManager;
-
     @PostMapping("/login")
     public String loginProcess(@ModelAttribute Student student, HttpServletRequest request) {
         String email = student.getEmail();
@@ -74,7 +61,6 @@ public class StudControl {
         return "redirect:/login?error=true";
     }
 
-
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("student", new Student());
@@ -85,47 +71,7 @@ public class StudControl {
     @PostMapping("/register")
     public String reg(@ModelAttribute Student student) {
         studentService.newUser(student);
-
-        /*boolean f = studentService.checkEmail(student.getEmail());
-        if (f) {
-            session.setAttribute("msg", "Email in Use");
-        } else {
-            student = studentService.newUser(student);
-            if (student != null) {
-                session.setAttribute("msg", "Registration Successful");
-            } else {
-                session.setAttribute("msg", "Not Successful, Try Again!");
-            }
-
-        } */
         return "redirect:/login";
-    }
-
-    @GetMapping("/courses")
-    public ModelAndView coursesPage() {
-        ModelAndView mav = new ModelAndView("courses");
-        mav.addObject("courses", courseService.getCourse());
-        return mav;
-    }
-
-    @GetMapping("/enrollments")
-    public ModelAndView  enrollmentsPage(Authentication authentication){
-        ModelAndView mav = new ModelAndView("enrollments");
-        User userDetails = (User) authentication.getPrincipal();
-        long sId = Long.valueOf(userDetails.getUsername());
-        mav.addObject("enrollment", enrollmentsService.getEnrollmentsList(sId));
-        return mav;
-    }
-
-    @GetMapping("/enrol/courses/{cId}")
-    public String  enrollmentsPage(Authentication authentication, @PathVariable String cId){
-        Enrollments enrollment= new Enrollments();
-        enrollment.setCId(Long.valueOf(cId));
-        User userDetails = (User) authentication.getPrincipal();
-        long sId = Long.valueOf(userDetails.getUsername());
-        enrollment.setSId(sId);
-        enrollmentsService.saveEnrollment(enrollment);
-        return "redirect:/enrollments";
     }
 
     @GetMapping({ "/profile"})
@@ -144,15 +90,4 @@ public class StudControl {
         studentService.updateStudent(student);
         return "redirect:/profile";
     }
-
-    @GetMapping("/grad")
-    public ModelAndView  graduationPage(Authentication authentication){
-        ModelAndView mav = new ModelAndView("grad");
-        User userDetails = (User) authentication.getPrincipal();
-        long studentId = Long.valueOf(userDetails.getUsername());
-        mav.addObject("grad", studentService.getGrad(studentId));
-        return mav;
-    }
-
-
 }
