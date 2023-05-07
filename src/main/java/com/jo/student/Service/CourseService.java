@@ -3,22 +3,25 @@ package com.jo.student.Service;
 import com.jo.student.Model.Course;
 import com.jo.student.Repo.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 @Component
 public class CourseService  {
 
-    @Autowired
-    CourseRepo courseRepo;
+     private final CourseRepo courseRepo;
+
+    public CourseService(CourseRepo courseRepo) {
+        this.courseRepo = courseRepo;
+    }
 
     public List<Course>getCourse(){
         List<Course> courseList = courseRepo.findAll();
         return courseList;
     }
+
 
     public List<Course> searchCourse(String name) {
         List<Course> courseList = courseRepo.findBycName(name);

@@ -5,28 +5,35 @@ import com.jo.student.Service.StudentService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class StudentControl {
 
-    @Autowired
-    StudentService studentService;
+    final StudentService studentService;
 
-    @GetMapping("/login")
-    public String login(org.springframework.ui.Model model) {
+    final PasswordEncoder passwordEncoder;
+
+    public StudentControl(StudentService studentService, PasswordEncoder passwordEncoder) {
+        this.studentService = studentService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @GetMapping({"/", "/login"})
+    public String login(Model model){
         model.addAttribute("student", new Student());
         return "login";
     }
@@ -69,7 +76,7 @@ public class StudentControl {
 
 
     @PostMapping("/register")
-    public String reg(@ModelAttribute Student student) {
+    public String register(@ModelAttribute Student student) {
         studentService.newUser(student);
         return "redirect:/login";
     }
@@ -78,7 +85,7 @@ public class StudentControl {
     public String profile(Authentication authentication, Model model){
         User userDetails = (User) authentication.getPrincipal();
         long sId = Long.valueOf(userDetails.getUsername());
-        model.addAttribute("student", studentService.getStudentBySId(sId));
+        model.addAttribute("student", studentService.getStudentByStudId(sId));
         return "profile";
     }
 
@@ -86,8 +93,19 @@ public class StudentControl {
     public String profile(Authentication authentication, @ModelAttribute Student student){
         User userDetails = (User) authentication.getPrincipal();
         long sId = Long.valueOf(userDetails.getUsername());
-        student.setSId(sId);
+        student.setStudId(sId);
         studentService.updateStudent(student);
         return "redirect:/profile";
     }
+
+    @GetMapping("/grad")
+    public ModelAndView graduationPage(Authentication authentication){
+        ModelAndView mav = new ModelAndView("grad");
+        User userDetails = (User) authentication.getPrincipal();
+        long studentId = Long.valueOf(userDetails.getUsername());
+        mav.addObject("grad", studentService.getGrad(studentId));
+        return mav;
+    }
+
+
 }

@@ -17,7 +17,7 @@ public class Student {
 
     private Long Id;
     @Column(nullable = false, unique = true)
-    private Long sId;
+    private Long studId;
     @Column (nullable = false)
     private String f_Name;
     @Column (nullable = false)
@@ -27,14 +27,20 @@ public class Student {
     @Column (nullable = false, unique = true)
     private String password;
 
-
-   public Long getId() {
+    public Long getId() {
         return Id;
     }
 
     public void setId(Long id) {
+        Id = id;
+    }
 
-       Id = id;
+    public Long getStudId() {
+        return studId;
+    }
+
+    public void setStudId(Long studId) {
+        this.studId = studId;
     }
 
     public String getF_Name() {
@@ -50,7 +56,7 @@ public class Student {
     }
 
     public void setL_Name(String l_Name) {
-                                  this.l_Name = l_Name;
+        this.l_Name = l_Name;
     }
 
     public String getEmail() {
@@ -61,19 +67,11 @@ public class Student {
         this.email = email;
     }
 
-    public String getPassword(String password) {
+    public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getSId() {
-       return sId;
-    }
-
-    public void setSId(long sId) {
-       this.sId = sId;
     }
 }

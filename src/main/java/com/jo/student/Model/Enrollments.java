@@ -16,8 +16,32 @@ public class Enrollments {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long enrollId;
     @Column(nullable = false)
-    private Long sId;
+    private Long studId;
     @Column(nullable = false)
-    private Long cId;
+    private Long courseId;
+
+    public Long getEnrollId() {
+        return enrollId;
+    }
+
+    public void setEnrollId(Long enrollId) {
+        this.enrollId = enrollId;
+    }
+
+    public Long getStudId() {
+        return studId;
+    }
+
+    public void setStudId(Long studId) {
+        this.studId = studId;
+    }
+
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
 }
 

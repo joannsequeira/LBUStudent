@@ -20,7 +20,7 @@ public class WebSecurityConfig {
     }
 
 
-/*    @Bean
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers("/anonymous*")
@@ -46,13 +46,13 @@ public class WebSecurityConfig {
                 .csrf()
                 .disable();
         return http.build();
-    } */
+    }
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
         return new MySimpleUrlAuthenticationSuccessHandler();
     }
-   /* @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
@@ -75,6 +75,5 @@ public class WebSecurityConfig {
 
 
         return http.build();
-    } */
-
+    }
 }

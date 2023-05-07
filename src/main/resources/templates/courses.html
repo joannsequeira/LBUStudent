@@ -174,7 +174,7 @@
                                     <td th:text="${courses.cName}" />
                                     <td th:text="${courses.fee}" />
                                     <td th:text="${courses.points}" />
-                                    <td ><a th:href="@{enrol/courses/{cId}(cId=${course.id})}">Click to enrol</a></td>
+                                    <td ><a th:href="@{enrol/courses/{courseId}(cId=${courses.id})}">Click to enrol</a></td>
 
                                 </tr>
 

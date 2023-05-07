@@ -10,16 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.Random;
 
 @Component
 public class StudentService {
 
-    @Autowired
-    private StudentRepo studentRepo;
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final StudentRepo studentRepo;
+    final PasswordEncoder passwordEncoder;
+
+    public StudentService(StudentRepo studentRepo, PasswordEncoder passwordEncoder) {
+        this.studentRepo = studentRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public Student getEmail(String email){
         Student stud = studentRepo.findByEmail(email);
@@ -29,23 +31,23 @@ public class StudentService {
     public Student newUser(Student student){
         Random ran = new Random();
         Integer numb = ran.nextInt(30000) + 10000;
-        student.setSId((long)numb);
+        student.setStudId((long)numb);
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentRepo.save(student);
         return null;
     }
 
     public void updateStudent(Student student) {
-        Student stud = studentRepo.findBySId(student.getSId());
+        Student stud = studentRepo.findByStudId(student.getStudId());
             stud.setF_Name(student.getF_Name());
-            stud.setF_Name(student.getL_Name());
+            stud.setL_Name(student.getL_Name());
             stud.setPassword(passwordEncoder.encode(student.getPassword()));
             studentRepo.save(stud);
         }
 
 
-    public Student getStudentBySId(Long sId) {
-        Student student = studentRepo.findBySId(sId);
+    public Student getStudentByStudId(Long studId){
+        Student student = studentRepo.findByStudId(studId);
         return student;
     }
 

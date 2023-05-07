@@ -31,19 +31,19 @@ public class Course {
         Id = id;
     }
 
-    public Integer getcId() {
+    public Integer getCId() {
         return cId;
     }
 
-    public void setcId(Integer cId) {
+    public void setCId(Integer cId) {
         this.cId = cId;
     }
 
-    public String getcName() {
+    public String getCName() {
         return cName;
     }
 
-    public void setcName(String cName) {
+    public void setCName(String cName) {
         this.cName = cName;
     }
 
