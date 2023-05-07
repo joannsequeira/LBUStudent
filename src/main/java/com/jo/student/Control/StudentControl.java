@@ -14,10 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -32,8 +29,8 @@ public class StudentControl {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping({"/", "/login"})
-    public String login(Model model){
+    @GetMapping({"/","/login"})
+    public String mainPage(Model model){
         model.addAttribute("student", new Student());
         return "login";
     }
@@ -68,7 +65,7 @@ public class StudentControl {
         return "redirect:/login?error=true";
     }
 
-    @GetMapping("/register")
+    @RequestMapping("/register")
     public String register(Model model) {
         model.addAttribute("student", new Student());
         return "register";
