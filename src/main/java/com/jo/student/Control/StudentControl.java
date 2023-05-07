@@ -57,15 +57,16 @@ public class StudentControl {
                     SecurityContextHolder.getContext().setAuthentication(null);
                 }
 
-                return "redirect:/courses";
-            }
-            System.out.println("=> No record exist.");
-        }
 
-        return "redirect:/login?error=true";
+            }
+            return "redirect:/courses";
+
+        }
+        System.out.println("=> No record exist.");
+        return "redirect:/register";
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("student", new Student());
         return "register";
